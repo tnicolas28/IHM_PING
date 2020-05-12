@@ -1,0 +1,35 @@
+html, body {
+  background-color: #112F41;
+  color: #ffffff;
+  min-width: 400px;
+}
+
+#ville {
+  text-transform: capitalize;
+}
+
+#ping {
+  font-size: 4em;
+}
+
+#changer {
+  background: rgba(178, 223, 251, .3);
+  cursor: pointer;
+}
+
+.displayPing {
+  padding: 15px;
+  margin: 10px 0;
+}
+
+.gPing {
+  background-color : #0c9463;
+}
+
+.bPing {
+  background-color: #f67280;
+}
+
+.aPing {
+  background-color: #ffa372;
+}
