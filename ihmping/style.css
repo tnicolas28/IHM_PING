@@ -1,12 +1,10 @@
 html, body {
-  background-color: #112F41;
+  background-image : url("img/espace.jpg");
   color: #ffffff;
   min-width: 400px;
 }
 
-#ville {
-  text-transform: capitalize;
-}
+
 
 #ping {
   font-size: 4em;
@@ -33,3 +31,4 @@ html, body {
 .aPing {
   background-color: #ffa372;
 }
+

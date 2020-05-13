@@ -6,15 +6,19 @@ function ping(delay,address = "ping.zenetys.com"){
     let times = 0;
     let average = 0;
     let interval = setInterval(()=>{  //Déclaration d'un interval afin de répéter l'action toutes les X millisecondes
-    let timePing = $.now(); //On déclare une variable contenant le temps en ms avant l'envoi de la requête
+       let timePing = $.now(); //On déclare une variable contenant le temps en ms avant l'envoi de la requête
     
        $.ajax({ //Requête AJAX au serveur
        url : "https://"+address,
        type : 'HEAD',
        cache : false,
+       crossDomain: true,
+       beforeSend : (xhr) => {
+         xhr.withCredentials = true;
+       },
        error : () => {
          let checkPing = document.createElement('div');
-         checkPing.textContent = 'Erreur, impossible d\'atteindre le serveur';
+         checkPing.innerHTML = 'Erreur, impossible d\'atteindre le serveur <i style = "float : right ;" class="fas fa-skull-crossbones pt-1"></i>' ;
          checkPing.className="displayPing bPing";
          document.querySelector('#displayPing').prepend(checkPing);
          clearInterval(interval);
@@ -27,15 +31,15 @@ function ping(delay,address = "ping.zenetys.com"){
          
          let checkPing = document.createElement('div');
          if (timePing < 70){
-           checkPing.textContent = "#"+times + " " + timePing + " ms, ping correct";
+           checkPing.innerHTML = "#"+times + " " + timePing + " ms, ping correct <i style = 'float : right;' class='far fa-smile-beam pt-1'></i>";
            checkPing.className = "displayPing gPing";
          }
          else if(timePing > 70 && timePing < 200){
-           checkPing.textContent = "#"+times + " " +timePing + " ms, ping moyen";
+           checkPing.innerHTML = "#"+times + " " +timePing + " ms, ping moyen <i style = 'float: right ;' class='far fa-meh pt-1'></i>";
            checkPing.className = "displayPing aPing";
          }
          else if(timePing > 200){
-           checkPing.textContent = "#" + times + " Requête perdue";
+           checkPing.innerHTML = "#" + times + " <b>Requête perdue</b><i style = 'float : right;' class='far fa-angry pt-1'></i>";
            checkPing.className = "displayPing bPing";
          }
          document.querySelector('#displayPing').prepend(checkPing);
@@ -48,7 +52,7 @@ function ping(delay,address = "ping.zenetys.com"){
       if (times >= 4){
       clearInterval(interval);
       console.log(average);
-      $('#ping_label').text(average);  
+      document.querySelector('#ping_label').innerHTML="<i class='far fa-clock'></i> " +  Math.round(average);  
       console.log("Fin du ping");
     }
     
